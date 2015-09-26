@@ -111,12 +111,12 @@ div.file-input > input[type="file"] {
     height   : 25%;
     position : absolute;
     top      : 25%;
-    left     : 0;
-       -moz-transform-origin : bottom right;
-    -webkit-transform-origin : bottom right;
-         -o-transform-origin : bottom right;
-        -ms-transform-origin : bottom right;
-            transform-origin : bottom right;
+    left     : 50%;
+       -moz-transform-origin : bottom left;
+    -webkit-transform-origin : bottom left;
+         -o-transform-origin : bottom left;
+        -ms-transform-origin : bottom left;
+            transform-origin : bottom left;
 }
 
 .red-peak-box.left {
@@ -153,7 +153,5 @@ div.file-input > input[type="file"] {
     height   : 100%;
     display  : block;
     position : absolute;
-    top      : 0;
-    right    : 0;
-    margin-right : -12.5%;
+    margin-left : -12.5%;
 }
