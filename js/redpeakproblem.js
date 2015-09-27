@@ -80,7 +80,7 @@
         $redPeakScene.width( imgSize + 'px' );
         $redPeakScene.height( imgSize + 'px' );
 
-        html2canvas( redPeakSceneElem ).then( function ( canvas ) {
+        html2canvas( redPeakSceneElem, { useCORS : true } ).then( function ( canvas ) {
             docBody.style.width  = '';
             docBody.style.height = '';
             if ( callback ) {
