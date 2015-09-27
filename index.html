@@ -20,6 +20,7 @@
 
 	<!-- Libraries -->
     <script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-alpha2/html2canvas.min.js"></script>
 
 	<!-- Main -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet" type="text/css" />
@@ -36,15 +37,16 @@
             <h1>The "Problem" with the "Red Peak" Flag</h1>
             <input type="url" placeholder="Enter an Image URL" id="enter-img-link" />
             <input type="button" value="Go" id="set-img-link" />
-            —or—
             <div class="file-input">
                 Open a File
                 <input type="file" accept="image/*" value="Open a File" id="open-img-file" />
             </div>
+            |
+            <input type="button" value="Save Image" id="save-img" />
 		</div>
 
 		<div class="wrapper-body" id="wrapper-body">
-            <div class="wrapper-scene" id="wrapper-scene">
+            <div class="wrapper-scene" id="red-peak-scene">
                 <div class="red-peak-box top">
                     <div class="red-peak-img-box">
                         <img class="red-peak-img" src="img/red-peak.png" />

@@ -5,11 +5,12 @@
  *
  */
 
-;(function ( window, document, $, undefined ) {
+;(function ( window, document, $, html2canvas, undefined ) {
 
     var $enterImgLink,
         $setImgLink,
         $openImgFile,
+        $saveImg,
         $wrapperHeader,
         $wrapperBody,
         $redPeakScene,
@@ -65,6 +66,37 @@
         window.location.hash = window.escape( $enterImgLink.val() );
     }
 
+    // Generate savable image using HTML2Canvas
+    function generateImg ( callback ) {
+
+        var docBody          = document.body,
+            redPeakSceneElem = $redPeakScene.get()[ 0 ],
+            imgSize          = 400;
+
+        if ( docBody.offsetWidth < imgSize || docBody.offsetHeight < imgSize ) {
+            docBody.style.width  = (imgSize + imgSize) + 'px';
+            docBody.style.height = (imgSize + imgSize) + 'px';
+        }
+        $redPeakScene.width( imgSize + 'px' );
+        $redPeakScene.height( imgSize + 'px' );
+
+        html2canvas( redPeakSceneElem ).then( function ( canvas ) {
+            docBody.style.width  = '';
+            docBody.style.height = '';
+            if ( callback ) {
+                callback( canvas.toDataURL() );
+            }
+        } );
+
+    }
+
+    // See generated image
+    function viewImg () {
+        generateImg( function ( dataURL ) {
+            window.location = dataURL;
+        } );
+    }
+
     // Init
     $( window.document ).ready( function () {
 
@@ -72,9 +104,10 @@
         $enterImgLink  = $( '#enter-img-link' );
         $setImgLink    = $( '#set-img-link' );
         $openImgFile   = $( '#open-img-file' );
+        $saveImg       = $( '#save-img' );
         $wrapperHeader = $( '#wrapper-header' );
         $wrapperBody   = $( '#wrapper-body' );
-        $redPeakScene  = $( '#wrapper-scene' );
+        $redPeakScene  = $( '#red-peak-scene' );
         $redPeakArms   = $( '.red-peak-img' );
 
         // Resize image scene
@@ -101,10 +134,13 @@
             reader.readAsDataURL( file );
         } );
 
-        // Load flag image on page load
+        // Save image
+        $saveImg.on( 'click', viewImg );
+
+        // Init
         setSceneSize();
         fromHash();
 
     } );
 
-}( window, document, jQuery ));
+}( window, document, jQuery, html2canvas ));

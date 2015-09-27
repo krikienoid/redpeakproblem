@@ -37,7 +37,7 @@ body,
 /* //// Styles //// */
 
 .wrapper-main {
-    background-color : #444;
+    background-color : #777;
 }
 
 /* Header */
@@ -56,17 +56,18 @@ div.file-input {
     margin         : 4px 2px;
     padding        : 6px 12px;
     background     : none;
-    border         : 2px solid rgba(100%, 100%, 100%, 0.75);
+    border         : 2px solid #fff;
     border-radius  : 6px;
-    color          : rgba(100%, 100%, 100%, 0.75);
+    color          : #fff;
     font           : 12pt 'Open Sans', sans-serif;
     vertical-align : bottom;
 }
 
+input:focus,
 input[type="button"]:hover,
 div.file-input:hover {
-    border-color : rgba(100%, 100%, 100%, 1);
-    color        : rgba(100%, 100%, 100%, 1);
+    border-color : #ff0;
+    color        : #ff0;
     transition   : 0.2s;
 }
 
