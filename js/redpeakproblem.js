@@ -48,14 +48,36 @@
         }
     }
 
+    // Get URI variables
+    function getURIVars () {
+        var vars  = [],
+            pairs = window.location.href.slice( window.location.href.indexOf( '?' ) + 1 ).split( '&' ),
+            pair, i;
+        for ( i = 0, ii = pairs.length; i < ii; i++ ) {
+            pair = pairs[ i ].split( '=' );
+            vars.push( pair[ 0 ] );
+            vars[ pair[ 0 ] ] = pair[ 1 ];
+        }
+        return vars;
+    }
+
     // Get hash data
     function fromHash () {
         var hashData = window.location.hash.split( '#' )[ 1 ],
             imgSrc;
         if ( hashData ) {
-            imgSrc = window.unescape( hashData );
+            if ( hashData[ 0 ] === '?' ) {
+                hashData = getURIVars()[ 'src' ];
+                if ( hashData ) {
+                    imgSrc = window.decodeURIComponent( hashData );
+                }
+            }
+            else {
+                // Support for old version of site
+                imgSrc = window.unescape( hashData );
+            }
         }
-        if ( hashData && imgSrc ) {
+        if ( imgSrc ) {
             setImg( imgSrc );
             $enterImgLink.val( imgSrc );
         }
@@ -63,7 +85,12 @@
 
     // Set hash data
     function toHash () {
-        window.location.hash = window.escape( $enterImgLink.val() );
+        if ( $enterImgLink.val() ) {
+            window.location.hash = '?src=' + window.encodeURIComponent( $enterImgLink.val() );
+        }
+        else {
+            window.location.hash = '';
+        }
     }
 
     // Generate savable image using HTML2Canvas
